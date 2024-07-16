@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Beyond the Shelf</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7d390; /* Set background color */
+        }
+        .navbar {
+            display: none; /* Hide navigation bar */
+        }
+        .container {
+            max-width: 1400px; /* Limit container width for content */
+            background-color: #5a5a59;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .team-member {
+            text-align: center;
+        }
+        .team-member img {
+            width: 200px; /* Set width for consistency */
+            height: 200px; /* Set height for consistency */
+            object-fit: cover; /* Maintain aspect ratio */
+            border-radius: 50%;
+            border: 4px solid #fff; /* Optional: add a border around the image */
+        }
+        .team-member h5 {
+            margin-top: 10px; /* Adjust spacing */
+            font-size: 1.5rem;
+        }
+        .team-member p {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="d.html">Beyond the Shelf</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recommend">Search</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/about">About Us <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>About Us</h2>
+        <p>Welcome to Beyond the Shelf, where we are passionate about books and helping readers discover new favorites. Our mission is to provide a personalized book recommendation experience that goes beyond the ordinary.</p>
+
+        <h4>Meet Our Team</h4>
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/Mypic.jpg') }}" alt="Nikhil N Pai" class="img-fluid">
+                    <h5>Nikhil N Pai</h5>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/ravithej.jpg') }}" alt="Ravithej Bhandary" class="img-fluid">
+                    <h5>Ravithej Bhandary M</h5>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/rakshitha.jpg') }}" alt="Rakshitha A Bhakta" class="img-fluid">
+                    <h5>Rakshitha A Bhakta</h5>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/priyankaa.jpg') }}" alt="Priyanka Bharadwaj" class="img-fluid">
+                    <h5>Priyanka Bharadwaj</h5>
+                </div>
+            </div>
+            <!-- Add more team members as needed -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

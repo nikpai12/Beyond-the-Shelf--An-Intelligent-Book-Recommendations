@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond the Shelf</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dim the background image */
+            z-index: -1;
+        }
+        
+        .modal-content {
+            background-color: #f9fbfd;
+            color: #101010;
+        }
+        
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hidden-container {
+            display: none;
+            background-color: #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow-y: auto; /* Enable vertical scroll */
+            max-height: calc(100vh - 200px); /* Adjusted height for approximately 2 pages */
+            width: 100%; /* Full width */
+            position: relative; /* Ensure position for absolute content */
+        }
+        
+        .show-container {
+            display: block !important;
+            max-height: calc(100vh - 100px); /* Expanded height to show more content */
+        }
+        
+        .title-tab {
+            background: linear-gradient(135deg, #c8ff47, #00bfff);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .display-4 {
+            font-family: 'Pacifico', cursive;
+            color: #ffd700;
+        }
+        
+        .lead {
+            color: #faf8f4;
+        }
+        
+        blockquote {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-left: 5px solid #f8f9fa;
+            margin-top: 20px;
+        }
+        
+        .click-me {
+            background: none;
+            border: none;
+            color: #ffd700;
+            font-size: 20px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .click-me:hover {
+            color: #ffa500;
+        }
+        
+        .home-section {
+            display: none;
+        }
+        
+        .slide-out {
+            animation: slideOut 1s forwards;
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        /* Remove default styles from the <a> tag */
+        .click-me-link {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <!-- Popup Modal -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Welcome to Beyond the Shelf!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Welcome to Beyond the Shelf! Discover books beyond the ordinary.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="container text-center mt-5 title-section">
+        <div class="title-tab">
+            <h1 class="display-4">Beyond the Shelf</h1>
+            <p class="lead">Discover books beyond the ordinary. Let your next favorite book find you.</p>
+        </div>
+        <div id="quoteCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"A room without books is like a body without a soul."</p>
+                        <footer class="blockquote-footer">Marcus Tullius Cicero</footer>
+                    </blockquote>
+                </div>
+                <div class="carousel-item">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"So many books, so little time."</p>
+                        <footer class="blockquote-footer">Frank Zappa</footer>
+                    </blockquote>
+                </div>
+                <div class="carousel-item">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"The only thing you absolutely have to know is the location of the library."</p>
+                        <footer class="blockquote-footer">Albert Einstein</footer>
+                    </blockquote>
+                </div>
+                <div class="carousel-item">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"Books are a uniquely portable magic."</p>
+                        <footer class="blockquote-footer">Stephen King</footer>
+                    </blockquote>
+                </div>
+                <div class="carousel-item">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"There is no friend as loyal as a book."</p>
+                        <footer class="blockquote-footer">Ernest Hemingway</footer>
+                    </blockquote>
+                </div>
+                <div class="carousel-item">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"Books are the mirrors of the soul."</p>
+                        <footer class="blockquote-footer">Virginia Woolf</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <a href="/home" class="click-me-link">
+            <button id="clickMeButton" class="click-me">Click Me</button>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#welcomeModal').modal('show'); // Show the welcome modal on page load
+            $('.carousel').carousel({
+                interval: 3000 // Set carousel interval
+            });
+
+            $('#clickMeButton').click(function() {
+                $('body').addClass('slide-out'); // Add slide-out animation class
+                setTimeout(function() {
+                    window.location.href = 'home.html'; // Redirect to new page after animation
+                }, 1000); // Adjust the timing to match the CSS animation duration
+            });
+        });
+    </script>
+</body>
+</html>

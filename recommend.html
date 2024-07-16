@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond the Shelf - Search</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome for icons -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        .text-black {
+            color: black;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: white;
+            height: 100%;
+        }
+        .card img {
+            height: 200px;
+            width: auto;
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* number of lines to show */
+            -webkit-box-orient: vertical;
+        }
+        .card-body {
+            text-align: center;
+        }
+        .navbar {
+            border-radius: 0;
+        }
+        body {
+            padding-top: 80px; /* Adjusted padding to accommodate fixed navbar */
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+        .card-item {
+            flex: 0 0 23%; /* Adjust the percentage to ensure exactly 4 cards per row */
+            margin: 15px;
+            box-sizing: border-box;
+        }
+        /* Navigation Bar Styles */
+        .navbar {
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+        }
+        .navbar-brand {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.5rem;
+            color: #fff !important;
+        }
+        .nav-link {
+            color: #fff !important;
+            font-size: 1.1rem;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #000 !important;
+        }
+
+        /* Search Page Styles */
+        .search-container {
+            background-color: #f7f7f7;
+            padding: 50px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .search-container h2 {
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px; /* Added margin-bottom for spacing */
+        }
+        .form-inline .form-group {
+            margin-right: 20px;
+            position: relative;
+        }
+        .form-inline .form-group label {
+            color: #333;
+            margin-right: 10px;
+        }
+        .form-control {
+            border-radius: 20px; /* Oval shape for input and dropdowns */
+            padding-right: 40px; /* Space for the search icon */
+        }
+        .btn-search {
+            background-color: #007bff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px; /* Oval shape for button */
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 1; /* Ensure search icon is above input */
+        }
+        .btn-search i {
+            font-size: 1rem;
+        }
+        .slider-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    max-height: 500px;
+    width: calc(100% - 40px); /* Make width same as search-container minus margins */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+        .card-item {
+            flex: 0 0 calc(23% - 30px); /* Adjusted percentage to accommodate margins */
+            margin: 15px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="/">Beyond the Shelf</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container search-container text-center mt-5">
+        <h2>Search for a Book</h2>
+        <form id="searchForm" class="form-inline justify-content-center" method="POST" action="/recommend_books">
+            <div class="form-group position-relative">
+                <select class="form-control" id="filterType" name="filter_type">
+                    <option value="title" {% if filter_type == "title" %}selected{% endif %}>Book Title</option>
+                    <option value="author" {% if filter_type == "author" %}selected{% endif %}>Author Name</option>
+                </select>
+            </div>
+            <div class="form-group position-relative">
+                <label for="sortBy">Sort By:</label>
+                <select class="form-control" id="sortBy" name="sort_by">
+                    <option value="newest" {% if sort_by == "newest" %}selected{% endif %}>Newest</option>
+                    <option value="oldest" {% if sort_by == "oldest" %}selected{% endif %}>Oldest</option>
+                    <option value="ratings" {% if sort_by == "ratings" %}selected{% endif %}>Ratings</option>
+                </select>
+            </div>
+            <div class="form-group position-relative">
+                <label for="recommendation_count">Count:</label>
+                <input type="number" id="recommendation_count" name="recommendation_count" class="form-control input-sm" min="5" max="25" step="5" value="{{ count }}" required>
+            </div>
+            <div class="form-group position-relative">
+                <input type="text" class="form-control" id="searchInput" name="user_input" placeholder="Enter book title or author">
+                <button type="submit" class="btn btn-search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {% if no_recommendations %}
+    <script>
+        alert("No similar books found.");
+    </script>
+    {% endif %}
+
+    {% if data %}
+    <div class="slider-container">
+        {% for i in data %}
+        <div class="card-item">
+            <div class="card">
+                <img class="card-img-top" src="{{ i[5] }}" alt="Book Image">
+                <div class="card-body">
+                    <p class="card-title text-black">{{ i[0] }}</p>
+                    <h4 class="text-black">{{ i[1] }}</h4>
+                    <p class="text-black">YOP: {{ i[2] }}</p>
+                    <p class="text-black">Votes: {{ i[3] }}</p>
+                    <p class="text-black">Rating: {{ i[4] | round(2) }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Example to scroll to top when clicking a button
+        $('.btn-scroll-top').on('click', function() {
+            $('.slider-container').animate({ scrollTop: 0 }, 'slow');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+body {
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dim the background image */
+    z-index: -1;
+}
+
+.modal-content {
+    background-color: #f9fbfd;
+    color: #101010;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hidden Container Styles */
+/* Hidden Container Styles */
+.hidden-container {
+    display: none;
+    background-color: #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow-y: auto; /* Enable vertical scroll */
+    max-height: calc(100vh - 200px); /* Adjusted height for approximately 2 pages */
+    width: 100%; /* Full width */
+    position: relative; /* Ensure position for absolute content */
+}
+
+.show-container {
+    display: block !important;
+    max-height: calc(100vh - 100px); /* Expanded height to show more content */
+}
+
+
+.show-container {
+    display: block !important;
+    max-height: calc(100vh - 100px); /* Expanded height to show more content */
+}
+
+.title-tab {
+    background: linear-gradient(135deg, #c8ff47, #00bfff);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.display-4 {
+    font-family: 'Pacifico', cursive;
+    color: #ffd700;
+}
+
+.lead {
+    color: #faf8f4;
+}
+
+blockquote {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-left: 5px solid #f8f9fa;
+    margin-top: 20px;
+}
+
+.click-me {
+    background: none;
+    border: none;
+    color: #ffd700;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.click-me:hover {
+    color: #ffa500;
+}
+
+.home-section {
+    display: none;
+}
+
+.slide-out {
+    animation: slideOut 1s forwards;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}

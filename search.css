@@ -1,0 +1,12 @@
+/* Hidden Container Styles */
+.hidden-container {
+    display: none;
+    background-color: #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow-y: auto; /* Enable vertical scroll */
+    max-height: 800px; /* Adjust the maximum height as needed */
+    width: 100%; /* Full width */
+    position: relative; /* Ensure position for absolute content */
+}

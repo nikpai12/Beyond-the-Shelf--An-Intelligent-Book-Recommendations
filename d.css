@@ -1,0 +1,32 @@
+body {
+    background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+.modal-content {
+    background-color: #343a40;
+    color: #9fcb00;
+}
+
+.container {
+    background-color: rgba(49, 65, 4, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+blockquote {
+    background-color: rgba(108, 33, 33, 0.3);
+    padding: 15px;
+    border-left: 5px solid #f8f9fa;
+    margin-top: 20px;
+}
+
+.display-4 {
+    color: #ffd700;
+}
+
+.lead {
+    color: #ffa500;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond the Shelf - Home</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
+    <style>
+        /* Navigation Bar Styles */
+        .navbar {
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+        }
+        .navbar-brand {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.5rem;
+            color: #fff !important;
+        }
+        .nav-link {
+            color: #fff !important;
+            font-size: 1.1rem;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #000 !important;
+        }
+
+        /* Container Styles */
+        .books-container {
+            background-color: #f7f7f7; /* Light greyish color */
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            width: 100%;
+            height: 800px;
+            overflow-y: auto;
+        }
+        .books-container h3 {
+            color: black;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card-item {
+            flex: 0 0 30%;
+            max-width: 30%;
+            margin: 1%;
+            box-sizing: border-box;
+        }
+        .card {
+            height: 370px; /* Increased height for more space */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            max-height: 200px; /* Kept the maximum height */
+            object-fit: contain;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+        }
+        .card-title {
+            font-size: 1.1rem; /* Slightly smaller */
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: black !important;
+        }
+        .card-body h4 {
+            font-size: 1rem; /* Slightly smaller */
+            color: black !important;
+            margin: 5px 0;
+        }
+        .card-body p {
+            font-size: 0.9rem; /* Slightly smaller */
+            color: black !important;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+   
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Beyond the Shelf</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recommend">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container text-center mt-5">
+        <h2>Welcome to Beyond the Shelf</h2>
+        <p>Explore our vast collection of book recommendations and find your next read.</p>
+    </div>
+
+    <div class="container books-container">
+        <h3 class="text-center">Top 50 Books</h3>
+        <div class="row">
+            <div class="container">
+                <div class="card-container">
+                    {% for i in range(book_name|length) %}
+                    <div class="card-item">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ image[i] }}" alt="Book Image">
+                            <div class="card-body">
+                                <p class="card-title">{{ book_name[i] }}</p>
+                                <h4>{{ author[i] }}</h4>
+                                <p>Votes - {{ votes[i] }}</p>
+                                <p>Rating - {{ rating[i] | round(2) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
